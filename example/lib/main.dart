@@ -52,41 +52,49 @@ class _MyHomePageState extends State<MyHomePage> {
   double _upperValue = 40.0;
   int start = 0;
   int end = 60;
-  
+
   int counter = 0;
-  
-  PublishSubject<double> eventObservable = new PublishSubject();
+
+  final eventObservable = new PublishSubject<double>();
   @override
   void initState() {
     super.initState();
-    const oneSec = const Duration(seconds:1);
+    const oneSec = const Duration(seconds: 1);
     var rng = new Random();
-    new Timer.periodic(oneSec, (Timer t) => eventObservable.add(rng.nextInt(59)+rng.nextDouble()));
-    
+    new Timer.periodic(
+      oneSec,
+      (Timer t) => eventObservable.add(
+        rng.nextInt(59) + rng.nextDouble(),
+      ),
+    );
   }
-  
+
   @override
   Widget build(BuildContext context) {
-      final ThemeData somTheme = new ThemeData(
-          primaryColor: Colors.blue,
-          accentColor: Colors.black,
-          backgroundColor: Colors.grey
-      );
-      return  new Scaffold(
-          appBar: new AppBar(
-              title: new Text("SpeedOMeter"),
-             // bottom: new Text("SpeedOMeter"),
+    final ThemeData somTheme = new ThemeData(
+        primaryColor: Colors.blue,
+        accentColor: Colors.black,
+        backgroundColor: Colors.grey);
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("SpeedOMeter"),
+        // bottom: new Text("SpeedOMeter"),
+      ),
+      body: new Column(
+        children: <Widget>[
+          new Padding(
+            padding: new EdgeInsets.all(40.0),
+            child: new SpeedOMeter(
+              start: start,
+              end: end,
+              highlightStart: (_lowerValue / end),
+              highlightEnd: (_upperValue / end),
+              themeData: somTheme,
+              eventObservable: this.eventObservable,
+            ),
           ),
-          body: new Column(
-              children: <Widget>[
-                  new Padding(
-                      padding: new EdgeInsets.all(40.0),
-                      child: new SpeedOMeter(start:start, end:end, highlightStart:(_lowerValue/end), highlightEnd:(_upperValue/end), themeData:somTheme, eventObservable: this.eventObservable),
-                  ),
-              ],
-          )
-      );
+        ],
+      ),
+    );
   }
-  
-  
 }

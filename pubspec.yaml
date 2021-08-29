@@ -1,16 +1,18 @@
 name: speedometer
 description: A little widget that given an Observable gives you an updated SpeedOMeter.
 version: 1.0.8
-author: Matteo Vitolo<matteo.vitolo@gmail.com>
-homepage: https://github.com/mvitolo/speedometer
+publish_to: none
+# author: Matteo Vitolo<matteo.vitolo@gmail.com>
+# homepage: https://github.com/mvitolo/speedometer
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  rxdart: '>=0.18.1'
+  rxdart: ^0.27.1
+  
 
 dev_dependencies:
   flutter_test:
