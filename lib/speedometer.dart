@@ -15,7 +15,7 @@ class SpeedOMeter extends StatefulWidget {
   final int end;
   final double highlightStart;
   final double highlightEnd;
-  final ThemeData themeData;
+  final Color completeColor, lineColor, accentColor;
 
   final PublishSubject<double> eventObservable;
   SpeedOMeter({
@@ -23,7 +23,9 @@ class SpeedOMeter extends StatefulWidget {
     required this.end,
     required this.highlightStart,
     required this.highlightEnd,
-    required this.themeData,
+    required this.completeColor,
+    required this.lineColor,
+    required this.accentColor,
     required this.eventObservable,
   });
 
@@ -112,8 +114,8 @@ class _SpeedOMeterState extends State<SpeedOMeter>
                 new Container(
                   child: new CustomPaint(
                     foregroundPainter: new LinePainter(
-                      lineColor: this.widget.themeData.backgroundColor,
-                      completeColor: this.widget.themeData.primaryColor,
+                      lineColor: this.widget.lineColor,
+                      completeColor: this.widget.completeColor,
                       startValue: widget.start,
                       endValue: widget.end,
                       startPercent: this.widget.highlightStart,
@@ -136,7 +138,7 @@ class _SpeedOMeterState extends State<SpeedOMeter>
                             value: val,
                             start: widget.start,
                             end: widget.end,
-                            color: this.widget.themeData.accentColor,
+                            color: this.widget.accentColor,
                           ),
                         ),
                       ],
@@ -149,7 +151,7 @@ class _SpeedOMeterState extends State<SpeedOMeter>
                     height: 30.0,
                     decoration: new BoxDecoration(
                       shape: BoxShape.circle,
-                      color: this.widget.themeData.backgroundColor,
+                      color: this.widget.lineColor,
                     ),
                   ),
                 ),
